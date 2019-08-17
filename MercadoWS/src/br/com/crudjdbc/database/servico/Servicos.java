@@ -1,9 +1,12 @@
 package br.com.crudjdbc.database.servico;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -40,6 +43,38 @@ public class Servicos {
 			return Response.status(Status.CONFLICT).build();
 		}
 	}
+	
+	@GET
+	@Path("todas_categorias")
+	@Produces(MediaType.APPLICATION_JSON)
+	public  List<CategoryEntity> testFindAll() {
+		try {
+			return categoryDao.findALl();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/*public void testFindById() {
+		logger.debug(String.format("Testing %s findById method.", CategoryDao.class));
+		CategoryEntity category= categoryDao.findByID(1L);
+		logger.debug(category);
+	}
+	
+	public void testUpdate() {
+		logger.debug(String.format("Testing %s update method.", CategoryDao.class));
+		CategoryEntity category = new CategoryEntity();
+		category.setId(1L);;
+		category.setName("CATEGORY 1 UPDATED");
+		categoryDao.update(category);
+	}
+	
+	public void testDelete() {
+		logger.debug(String.format("Testing %s delete method.", CategoryDao.class));
+		CategoryEntity category = new CategoryEntity();
+		category.setId(1L);;
+		categoryDao.delete(category);
+	}*/
 	
 	
 }
