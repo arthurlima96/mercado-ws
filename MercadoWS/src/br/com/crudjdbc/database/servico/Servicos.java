@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -47,7 +48,7 @@ public class Servicos {
 	@GET
 	@Path("todas_categorias")
 	@Produces(MediaType.APPLICATION_JSON)
-	public  List<CategoryEntity> testFindAll() {
+	public  List<CategoryEntity> todasCetegorias() {
 		try {
 			return categoryDao.findALl();
 		} catch (Exception e) {
@@ -55,11 +56,18 @@ public class Servicos {
 		}
 	}
 	
-	/*public void testFindById() {
-		logger.debug(String.format("Testing %s findById method.", CategoryDao.class));
-		CategoryEntity category= categoryDao.findByID(1L);
-		logger.debug(category);
+	@GET
+	@Path("categoria/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public  CategoryEntity categoriaPorId(@PathParam("id")Long id ) {
+		try {
+			return categoryDao.findByID(id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
+	
+	/*
 	
 	public void testUpdate() {
 		logger.debug(String.format("Testing %s update method.", CategoryDao.class));
