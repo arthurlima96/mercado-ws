@@ -3,6 +3,7 @@ package br.com.crudjdbc.database.servico;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -80,14 +81,17 @@ public class Servicos {
 		}
 	}
 	
-	/*
-		
-	public void testDelete() {
-		logger.debug(String.format("Testing %s delete method.", CategoryDao.class));
-		CategoryEntity category = new CategoryEntity();
-		category.setId(1L);;
-		categoryDao.delete(category);
-	}*/
-	
+	@DELETE
+	@Path("del_categoria/{id}")
+	public Response deletarCategoria(@PathParam("id")Long id) {
+		try {
+			CategoryEntity category = new CategoryEntity();
+			category.setId(id);
+			categoryDao.delete(category);
+			return Response.status(Status.ACCEPTED).build();
+		} catch (Exception e) {
+			return Response.status(Status.CONFLICT).build();
+		}
+	}	
 	
 }
